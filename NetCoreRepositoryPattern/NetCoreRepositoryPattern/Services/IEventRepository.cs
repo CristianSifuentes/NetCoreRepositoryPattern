@@ -15,12 +15,12 @@ namespace NetCoreRepositoryPattern.Services
 
         //events;
         Task<Event[]> GetEventArgs(bool includeGigs = false);
-        Task<Event> GetEvent(bool includeGigs = false);
+        Task<Event> GetEvent(int eventId, bool includeGigs = false);
         Task<Event[]> GetEventsByDate(DateTime date, bool includeGigs = false);
 
         //gigs
         Task<Gig[]> GetGigsByEvent(int eventId, bool includeComedians = false);
-        Task<Gig> GetGigByEvent(int eventId, bool includeComedians = false);
+        Task<Gig> GetGig(int gigid, bool includeComedians = false);
         Task<Gig[]> GetGigsByVenue(int venueid, bool includeComedians = false);
 
         //comedians
