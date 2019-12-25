@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace NetCoreRepositoryPattern.Services
 {
-    public class EventRepositiry : IEventRepository
+    public class EventRepository : IEventRepository
     {
         private readonly EventContext _eventContext;
-        private readonly ILogger<EventRepositiry> _logger;
+        private readonly ILogger<EventRepository> _logger;
 
 
-        public EventRepositiry(EventContext eventContext, ILogger<EventRepositiry> logger)
+        public EventRepository(EventContext eventContext, ILogger<EventRepository> logger)
         {
             _eventContext = eventContext;
             _logger = logger;
@@ -138,6 +138,7 @@ namespace NetCoreRepositoryPattern.Services
             }
 
             query = query.Where(e => e.Event.EventId == eventId)
+                .Include(e=> e.Event)
                    .OrderByDescending(g => g.GigHeadline);
 
             return await query.ToArrayAsync();
@@ -158,6 +159,7 @@ namespace NetCoreRepositoryPattern.Services
             }
 
             query = query.Where(v => v.Event.Venue.VenueId == venueid)
+                   .Include(v=> v.Event.Venue)
                    .OrderByDescending(g => g.GigHeadline);
 
             return await query.ToArrayAsync();
