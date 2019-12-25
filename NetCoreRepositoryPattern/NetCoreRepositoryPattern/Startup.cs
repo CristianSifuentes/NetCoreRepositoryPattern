@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using NetCoreRepositoryPattern.Services;
 using repositorypattern.Context;
 
 namespace NetCoreRepositoryPattern
@@ -17,7 +18,9 @@ namespace NetCoreRepositoryPattern
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<EventContext>();
-            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             
         }
 
