@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using NetCoreRepositoryPattern.Dto;
 using NetCoreRepositoryPattern.Services;
 using repositorypattern.Models;
@@ -17,11 +18,13 @@ namespace NetCoreRepositoryPattern.Controllers
     {
         private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
+        private readonly LinkGenerator _linkGenerator;
 
-        public EventsController(IEventRepository eventRepository, IMapper mapper)
+        public EventsController(IEventRepository eventRepository, IMapper mapper, LinkGenerator linkGenerator)
         {
             _eventRepository = eventRepository;
             _mapper = mapper;
+            _linkGenerator = linkGenerator;
         }
 
         [HttpGet]
@@ -54,6 +57,48 @@ namespace NetCoreRepositoryPattern.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
             }
+        }
+
+
+        [HttpGet("search")]
+        public async Task<ActionResult<EventDto[]>> SearchByDate(DateTime date, bool includeGigs = false)
+        {
+            try
+            {
+                var results = await _eventRepository.GetEventsByDate(date, includeGigs);
+                if (results == null) return NotFound();
+
+                var mappedEntities = _mapper.Map<EventDto[]>(results);
+                return Ok(mappedEntities);
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
+            }
+        }
+
+
+
+        [HttpPost]
+        public async Task<ActionResult<EventDto>> Post(EventDto dto)
+        {
+            try
+            {
+                var mappedEntity = _mapper.Map<Event>(dto);
+                _eventRepository.Add(mappedEntity);
+
+                if (await _eventRepository.Save())
+                {
+                    var location = _linkGenerator.GetPathByAction("Get", "Events", new { mappedEntity.EventId });
+                    return Created(location, _mapper.Map<EventDto>(mappedEntity));
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
+            return BadRequest();
         }
 
     }

@@ -14,11 +14,10 @@ namespace NetCoreRepositoryPattern.Dto
         [Required]
         [StringLength(20)]
         public string EventName { get; set; }
-
         public DateTime EventDate { get; set; }
 
+        public int VenueId { get; set; }
         public VenueDto Venue { get; set; }
-
         public ICollection<GigDto> Gigs { get; set; }
     }
 }
