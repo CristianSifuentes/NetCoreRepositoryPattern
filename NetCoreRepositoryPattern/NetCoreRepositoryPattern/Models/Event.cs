@@ -10,7 +10,6 @@ namespace repositorypattern.Models
         public string EventName { get; set; }
         public DateTime EventDate { get; set; }
 
-
         [ForeignKey("VenueId")]
         public int VenueId { get; set; }
         public Venue Venue { get; set; }

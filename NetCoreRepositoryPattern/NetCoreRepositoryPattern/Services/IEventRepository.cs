@@ -13,15 +13,15 @@ namespace NetCoreRepositoryPattern.Services
         void Update<T>(T entity) where T : class;
         Task<bool> Save();
 
-        //events;
-        Task<Event[]> GetEventArgs(bool includeGigs = false);
+        //events
+        Task<Event[]> GetEvents(bool includeGigs = false);
         Task<Event> GetEvent(int eventId, bool includeGigs = false);
         Task<Event[]> GetEventsByDate(DateTime date, bool includeGigs = false);
 
-        //gigs
+        //Gigs
         Task<Gig[]> GetGigsByEvent(int eventId, bool includeComedians = false);
-        Task<Gig> GetGig(int gigid, bool includeComedians = false);
-        Task<Gig[]> GetGigsByVenue(int venueid, bool includeComedians = false);
+        Task<Gig> GetGig(int gigId, bool includeComedians = false);
+        Task<Gig[]> GetGigsByVenue(int venueId, bool includeComedians = false);
 
         //comedians
         Task<Comedian[]> GetComedians();

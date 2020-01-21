@@ -11,4 +11,3 @@ C:\Users\sifue\Documents\Cristian\proyectos\NetCoreRepositoryPattern\NetCoreRepo
 C:\Users\sifue\Documents\Cristian\proyectos\NetCoreRepositoryPattern\NetCoreRepositoryPattern\NetCoreRepositoryPattern\bin\Debug\netcoreapp2.2\NetCoreRepositoryPattern.pdb
 C:\Users\sifue\Documents\Cristian\proyectos\NetCoreRepositoryPattern\NetCoreRepositoryPattern\NetCoreRepositoryPattern\obj\Debug\netcoreapp2.2\NetCoreRepositoryPattern.dll
 C:\Users\sifue\Documents\Cristian\proyectos\NetCoreRepositoryPattern\NetCoreRepositoryPattern\NetCoreRepositoryPattern\obj\Debug\netcoreapp2.2\NetCoreRepositoryPattern.pdb
-C:\Users\sifue\Documents\Cristian\proyectos\NetCoreRepositoryPattern\NetCoreRepositoryPattern\NetCoreRepositoryPattern\obj\Debug\netcoreapp2.2\NetCoreRepositoryPattern.csprojAssemblyReference.cache
